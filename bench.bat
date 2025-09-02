@@ -1,0 +1,1 @@
+node tests/run-benchmarks.js
