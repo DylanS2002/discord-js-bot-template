@@ -1,0 +1,126 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Create test environment
+        run: |
+          mkdir -p data
+          touch data/bot.db
+          cp .env.template .env
+          echo "DISCORD_TOKEN=test_token" >> .env
+          echo "CLIENT_ID=123456789" >> .env
+
+      - name: Run benchmarks
+        run: npm run bench
+
+      - name: Run stress tests
+        run: npm run stress
+
+  release:
+    needs: test
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate documentation
+        run: npm run docs
+
+      - name: Get version from tag
+        id: get_version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+
+      - name: Generate changelog
+        id: changelog
+        run: |
+          echo "CHANGELOG<<EOF" >> $GITHUB_OUTPUT
+          git log --pretty=format:"- %s" $(git describe --tags --abbrev=0 HEAD~1)..HEAD >> $GITHUB_OUTPUT
+          echo "" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Create release archive
+        run: |
+          mkdir -p release/discord-bot-template-${{ steps.get_version.outputs.VERSION }}
+          cp -r src/ release/discord-bot-template-${{ steps.get_version.outputs.VERSION }}/
+          cp -r docs/ release/discord-bot-template-${{ steps.get_version.outputs.VERSION }}/
+          cp package.json package-lock.json README.md .env.template release/discord-bot-template-${{ steps.get_version.outputs.VERSION }}/
+          cd release
+          tar -czf discord-bot-template-${{ steps.get_version.outputs.VERSION }}.tar.gz discord-bot-template-${{ steps.get_version.outputs.VERSION }}/
+          zip -r discord-bot-template-${{ steps.get_version.outputs.VERSION }}.zip discord-bot-template-${{ steps.get_version.outputs.VERSION }}/
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ steps.get_version.outputs.VERSION }}
+          body: |
+            ## Discord Bot Template v${{ steps.get_version.outputs.VERSION }}
+            
+            ### Changes
+            ${{ steps.changelog.outputs.CHANGELOG }}
+            
+            ### Installation
+            1. Download and extract the archive
+            2. Run `npm install` 
+            3. Copy `.env.template` to `.env` and configure
+            4. Run `npm start`
+            
+            ### Performance Benchmarks
+            All components tested and performance validated.
+            
+            For full documentation, see the included README.md and docs/ directory.
+          draft: false
+          prerelease: false
+
+      - name: Upload release assets
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./release/discord-bot-template-${{ steps.get_version.outputs.VERSION }}.tar.gz
+          asset_name: discord-bot-template-${{ steps.get_version.outputs.VERSION }}.tar.gz
+          asset_content_type: application/gzip
+
+      - name: Upload zip asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./release/discord-bot-template-${{ steps.get_version.outputs.VERSION }}.zip
+          asset_name: discord-bot-template-${{ steps.get_version.outputs.VERSION }}.zip
+          asset_content_type: application/zip
