@@ -1,51 +1,51 @@
 {
   "db_concurrent_writes": {
-    "operations": 1010,
+    "operations": 871,
     "errors": 0,
     "memoryStart": 21.08,
     "memoryPeak": 0,
-    "opsPerSecond": 200.23905370909046,
+    "opsPerSecond": 173.3098149327756,
     "errorRate": 0,
-    "avgResponseTime": 49.94019198019802,
-    "memoryGrowth": 3.9200000000000017
+    "avgResponseTime": 57.646246039035546,
+    "memoryGrowth": 2.360000000000003
   },
   "db_concurrent_reads": {
-    "operations": 233,
+    "operations": 75,
     "errors": 0,
-    "memoryStart": 25,
+    "memoryStart": 23.44,
     "memoryPeak": 0,
-    "opsPerSecond": 43.12491579767648,
+    "opsPerSecond": 11.392985384470721,
     "errorRate": 0,
-    "avgResponseTime": 447.01818369098754,
-    "memoryGrowth": 9.219999999999999
+    "avgResponseTime": 1563.723512000001,
+    "memoryGrowth": 44.07000000000001
   },
   "db_sustained_operations": {
-    "operations": 530,
+    "operations": 399,
     "errors": 0,
-    "memoryStart": 34.26,
-    "opsPerSecond": 53,
+    "memoryStart": 67.54,
+    "opsPerSecond": 39.9,
     "errorRate": 0,
-    "memoryGrowth": 3.6400000000000006
+    "memoryGrowth": 8.429999999999993
   },
   "rate_limit_concurrent": {
-    "operations": 602,
+    "operations": 391,
     "errors": 0,
-    "memoryStart": 37.94,
+    "memoryStart": 76.04,
     "memoryPeak": 0,
-    "opsPerSecond": 199.20831570957452,
+    "opsPerSecond": 128.76330518477474,
     "errorRate": 0,
-    "avgResponseTime": 75.07559418604654,
-    "memoryGrowth": 7.170000000000002
+    "avgResponseTime": 116.10876445012778,
+    "memoryGrowth": -60.470000000000006
   },
   "permission_check_concurrent": {
-    "operations": 6924539,
+    "operations": 6602749,
     "errors": 0,
-    "memoryStart": 45.11,
+    "memoryStart": 15.59,
     "memoryPeak": 0,
-    "opsPerSecond": 3462263.094813273,
+    "opsPerSecond": 3288785.1947138985,
     "errorRate": 0,
-    "avgResponseTime": 0.014312878286579673,
-    "memoryGrowth": 131.02999999999997
+    "avgResponseTime": 0.01507224931618185,
+    "memoryGrowth": 173.06
   },
   "rate_limit_boundaries": {
     "allowedCount": 10,
@@ -53,45 +53,45 @@
     "rateLimitWorking": true
   },
   "plugin_loading_concurrent": {
-    "operations": 935486,
+    "operations": 905923,
     "errors": 0,
-    "memoryStart": 176.55,
+    "memoryStart": 174.67,
     "memoryPeak": 0,
-    "opsPerSecond": 467742.7193543687,
+    "opsPerSecond": 452960.72996675957,
     "errorRate": 0,
-    "avgResponseTime": 0.05331252311630507,
-    "memoryGrowth": 33.01999999999998
+    "avgResponseTime": 0.055048884066248235,
+    "memoryGrowth": 43.400000000000006
   },
   "message_parsing_sustained": {
-    "operations": 509,
+    "operations": 508,
     "errors": 0,
-    "memoryStart": 209.58,
-    "opsPerSecond": 63.625,
+    "memoryStart": 218.07,
+    "opsPerSecond": 63.5,
     "errorRate": 0,
-    "memoryGrowth": -193.53
+    "memoryGrowth": -202.01999999999998
   },
   "api_lifecycle_concurrent": {
-    "operations": 6572350,
+    "operations": 6682149,
     "errors": 0,
-    "memoryStart": 16.07,
+    "memoryStart": 16.08,
     "memoryPeak": 0,
-    "opsPerSecond": 2190778.732697994,
+    "opsPerSecond": 2227377.2830649717,
     "errorRate": 0,
-    "avgResponseTime": 0.0021505898346844137,
-    "memoryGrowth": 61.830000000000005
+    "avgResponseTime": 0.0021063294458101415,
+    "memoryGrowth": 136.10000000000002
   },
   "memory_leak_detection": {
     "operations": 954,
     "errors": 0,
-    "memoryStart": 77.91,
+    "memoryStart": 152.19,
     "opsPerSecond": 63.6,
     "errorRate": 0,
-    "memoryGrowth": -9.179999999999993
+    "memoryGrowth": -9.199999999999989
   },
   "memory_leak_analysis": {
-    "initialMemory": 77.91,
-    "finalMemory": 68.73,
-    "potentialLeak": -9.179999999999993,
+    "initialMemory": 152.19,
+    "finalMemory": 142.99,
+    "potentialLeak": -9.199999999999989,
     "leakDetected": false
   }
 }

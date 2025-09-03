@@ -6,8 +6,8 @@
         "scripts": {
                 "start": "node src/main.js",
                 "dev": "node --watch src/main.js",
-                "bench": "node tests/run-benchmarks.js",
-                "bench:check": "node tests/run-benchmarks.js && node tests/check-regressions.js",
+                "bench": "node --expose-gc tests/run-benchmarks.js",
+                "bench:check": "node --expose-gc tests/run-benchmarks.js && node tests/check-regressions.js",
                 "baseline": "node tests/run-benchmarks.js --update-baseline",
                 "stress": "node tests/run-stress-tests.js",
                 "docs": "node scripts/generate-docs.js",

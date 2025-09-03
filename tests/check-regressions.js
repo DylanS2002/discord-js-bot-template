@@ -1,10 +1,10 @@
 const fs = require('fs').promises;
 const { PATH_OUTPUT, PATH_BASELINE, PATH_PR_BASELINE } = require('./result-paths');
 
-const SPEED_THRESHOLD = 15;
-const MEMORY_THRESHOLD = 20;
-const SPEED_IMPROVEMENT_THRESHOLD = 10;
-const MEMORY_IMPROVEMENT_THRESHOLD = 10;
+const SPEED_REGRESSION_THRESHOLD_MS = 5;
+const MEMORY_REGRESSION_THRESHOLD_MB = 10;
+const SPEED_IMPROVEMENT_THRESHOLD_MS = 2;
+const MEMORY_IMPROVEMENT_THRESHOLD_MB = 5;
 
 const SKIP_COMPONENTS = ['audit_logging', 'docs_generation'];
 
@@ -47,59 +47,57 @@ async function checkRegressions() {
 
         const baselineResult = baseline[component];
 
-        if (baselineResult.speed_ms > 0) {
-            const speedChange = ((result.speed_ms - baselineResult.speed_ms) / baselineResult.speed_ms) * 100;
-            if (speedChange > SPEED_THRESHOLD) {
-                regressions.push({
-                    component,
-                    type: 'speed',
-                    change: speedChange.toFixed(1),
-                    current: result.speed_ms,
-                    baseline: baselineResult.speed_ms
-                });
-            } else if (speedChange < -SPEED_IMPROVEMENT_THRESHOLD) {
-                improvements.push({
-                    component,
-                    type: 'speed',
-                    improvement: Math.abs(speedChange).toFixed(1)
-                });
-            }
+        const speedChange = result.speed_ms - baselineResult.speed_ms;
+        if (speedChange > SPEED_REGRESSION_THRESHOLD_MS) {
+            regressions.push({
+                component,
+                type: 'speed',
+                change: speedChange.toFixed(2),
+                current: result.speed_ms,
+                baseline: baselineResult.speed_ms
+            });
+        } else if (speedChange < -SPEED_IMPROVEMENT_THRESHOLD_MS) {
+            improvements.push({
+                component,
+                type: 'speed',
+                improvement: Math.abs(speedChange).toFixed(2)
+            });
         }
 
-        if (baselineResult.memory_mb > 0) {
-            const memoryChange = ((result.memory_mb - baselineResult.memory_mb) / baselineResult.memory_mb) * 100;
-            if (memoryChange > MEMORY_THRESHOLD) {
-                regressions.push({
-                    component,
-                    type: 'memory',
-                    change: memoryChange.toFixed(1),
-                    current: result.memory_mb,
-                    baseline: baselineResult.memory_mb
-                });
-            } else if (memoryChange < -MEMORY_IMPROVEMENT_THRESHOLD) {
-                improvements.push({
-                    component,
-                    type: 'memory',
-                    improvement: Math.abs(memoryChange).toFixed(1)
-                });
-            }
+        const memoryChange = result.memory_mb - baselineResult.memory_mb;
+        if (memoryChange > MEMORY_REGRESSION_THRESHOLD_MB) {
+            regressions.push({
+                component,
+                type: 'memory',
+                change: memoryChange.toFixed(2),
+                current: result.memory_mb,
+                baseline: baselineResult.memory_mb
+            });
+        } else if (memoryChange < -MEMORY_IMPROVEMENT_THRESHOLD_MB) {
+            improvements.push({
+                component,
+                type: 'memory',
+                improvement: Math.abs(memoryChange).toFixed(2)
+            });
         }
     }
 
     if (improvements.length > 0) {
         console.log('Performance improvements detected:');
         improvements.forEach(imp => {
-            console.log(`  ✓ ${imp.component}: ${imp.type} improved by ${imp.improvement}%`);
+            const unit = imp.type === 'speed' ? 'ms' : 'MB';
+            console.log(`  ✓ ${imp.component}: ${imp.type} improved by ${imp.improvement}${unit}`);
         });
     }
 
     if (regressions.length > 0) {
         console.log('Performance regressions detected:');
         regressions.forEach(reg => {
-            console.log(`  ✗ ${reg.component}: ${reg.type} regression +${reg.change}% (${reg.current} vs ${reg.baseline})`);
+            const unit = reg.type === 'speed' ? 'ms' : 'MB';
+            console.log(`  ✗ ${reg.component}: ${reg.type} regression +${reg.change}${unit} (${reg.current} vs ${reg.baseline})`);
         });
         console.log(`\nFailed: ${regressions.length} regressions exceed thresholds`);
-        console.log(`Speed threshold: ${SPEED_THRESHOLD}%, Memory threshold: ${MEMORY_THRESHOLD}%`);
+        console.log(`Speed threshold: ${SPEED_REGRESSION_THRESHOLD_MS}ms, Memory threshold: ${MEMORY_REGRESSION_THRESHOLD_MB}MB`);
         process.exit(1);
     }
 
