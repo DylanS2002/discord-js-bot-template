@@ -1,36 +1,59 @@
 const fs = require('fs').promises;
-const path = require('path');
+const ASTParser = require('./ast-parser');
 
 class ModuleParser {
+    constructor() {
+        this.astParser = new ASTParser();
+    }
+
     async parseFile(filePath, relativePath) {
         const content = await fs.readFile(filePath, 'utf8');
         
-        return {
-            path: relativePath,
-            exports: this.extractExports(content),
-            dependencies: this.extractDependencies(content),
-            lineCount: content.split('\n').length,
-            description: this.getDescription(relativePath)
-        };
+        const astResult = await this.astParser.parseFile(filePath);
+        
+        if (astResult) {
+            return {
+                path: relativePath,
+                exports: astResult.exports,
+                dependencies: astResult.dependencies,
+                lineCount: content.split('\n').length,
+                description: this.getDescription(relativePath),
+                parserUsed: 'AST'
+            };
+        } else {
+            return {
+                path: relativePath,
+                exports: this.extractExports(content),
+                dependencies: this.extractDependencies(content),
+                lineCount: content.split('\n').length,
+                description: this.getDescription(relativePath),
+                parserUsed: 'regex'
+            };
+        }
     }
 
     extractExports(content) {
         const exports = [];
-        const exportRegex = /module\.exports\s*=\s*{([^}]+)}/;
-        const match = content.match(exportRegex);
+        const match = content.match(/module\.exports\s*=\s*{([^{}]*(?:{[^{}]*}[^{}]*)*)}/);
         
         if (match) {
-            const exportList = match[1]
+            const objectContent = match[1];
+            const properties = objectContent
                 .split(',')
-                .map(e => e.trim().split(':')[0].trim())
-                .filter(e => e && !e.startsWith('//'));
-            exports.push(...exportList);
-        }
-        
-        const singleExport = /module\.exports\s*=\s*(\w+)/;
-        const singleMatch = content.match(singleExport);
-        if (singleMatch && !match) {
-            exports.push(singleMatch[1]);
+                .map(prop => {
+                    const colonIndex = prop.indexOf(':');
+                    if (colonIndex === -1) return prop.trim();
+                    return prop.slice(0, colonIndex).trim();
+                })
+                .map(prop => prop.replace(/['"]/g, ''))
+                .filter(prop => prop && !prop.startsWith('//') && /^[a-zA-Z_$][\w$]*$/.test(prop));
+            
+            exports.push(...properties);
+        } else {
+            const singleMatch = content.match(/module\.exports\s*=\s*(\w+)/);
+            if (singleMatch) {
+                exports.push(singleMatch[1]);
+            }
         }
         
         return exports;

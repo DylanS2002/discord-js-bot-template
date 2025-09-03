@@ -8,21 +8,23 @@
                 "dev": "node --watch src/main.js",
                 "bench": "node tests/run-benchmarks.js",
                 "baseline": "node tests/run-benchmarks.js --update-baseline",
+                "stress": "node tests/run-stress-tests.js",
                 "docs": "node scripts/generate-docs.js",
-                "docs:update": "npm run docs && echo 'Documentation updated'"
+                "docs:update": "npm run docs && echo 'Documentation updated'",
+                "docs:install-parser": "npm install @babel/parser"
         },
         "dependencies": {
                 "cors": "^2.8.5",
                 "discord.js": "^14.14.1",
                 "dotenv": "^16.3.1",
-                "eslint-plugin-sonarjs": "^3.0.5",
                 "express": "^4.18.2",
                 "express-rate-limit": "^7.1.5",
                 "sqlite3": "^5.1.6"
         },
+        "optionalDependencies": {
+                "@babel/parser": "^7.28.3"
+        },
         "devDependencies": {
-                "@eslint/js": "^9.34.0",
-                "eslint": "^9.34.0",
                 "globals": "^16.3.0",
                 "nodemon": "^3.0.3"
         }

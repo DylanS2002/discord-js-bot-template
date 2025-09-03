@@ -1,0 +1,97 @@
+{
+  "db_concurrent_writes": {
+    "operations": 1040,
+    "errors": 0,
+    "memoryStart": 21.04,
+    "memoryPeak": 0,
+    "opsPerSecond": 206.67202066434047,
+    "errorRate": 0,
+    "avgResponseTime": 48.387455384615365,
+    "memoryGrowth": 4.400000000000002
+  },
+  "db_concurrent_reads": {
+    "operations": 484,
+    "errors": 0,
+    "memoryStart": 25.44,
+    "memoryPeak": 0,
+    "opsPerSecond": 93.93198229902254,
+    "errorRate": 0,
+    "avgResponseTime": 209.8827995867766,
+    "memoryGrowth": 50.46000000000001
+  },
+  "db_sustained_operations": {
+    "operations": 557,
+    "errors": 0,
+    "memoryStart": 75.94,
+    "opsPerSecond": 55.7,
+    "errorRate": 0,
+    "memoryGrowth": -49.91
+  },
+  "rate_limit_concurrent": {
+    "operations": 615,
+    "errors": 0,
+    "memoryStart": 26.08,
+    "memoryPeak": 0,
+    "opsPerSecond": 201.1876022376511,
+    "errorRate": 0,
+    "avgResponseTime": 74.43667447154473,
+    "memoryGrowth": -5.149999999999999
+  },
+  "permission_check_concurrent": {
+    "operations": 6985902,
+    "errors": 0,
+    "memoryStart": 20.94,
+    "memoryPeak": 0,
+    "opsPerSecond": 3492945.0619933987,
+    "errorRate": 0,
+    "avgResponseTime": 0.014186100878315129,
+    "memoryGrowth": 121.93
+  },
+  "rate_limit_boundaries": {
+    "allowedCount": 10,
+    "deniedCount": 10,
+    "rateLimitWorking": true
+  },
+  "plugin_loading_concurrent": {
+    "operations": 938324,
+    "errors": 0,
+    "memoryStart": 143.29,
+    "memoryPeak": 0,
+    "opsPerSecond": 469161.50738041685,
+    "errorRate": 0,
+    "avgResponseTime": 0.05314836122700184,
+    "memoryGrowth": 39.46000000000001
+  },
+  "message_parsing_sustained": {
+    "operations": 508,
+    "errors": 0,
+    "memoryStart": 182.76,
+    "opsPerSecond": 63.5,
+    "errorRate": 0,
+    "memoryGrowth": -11.329999999999984
+  },
+  "api_lifecycle_concurrent": {
+    "operations": 7100398,
+    "errors": 0,
+    "memoryStart": 171.44,
+    "memoryPeak": 0,
+    "opsPerSecond": 2366795.7042465867,
+    "errorRate": 0,
+    "avgResponseTime": 0.0019828607354125502,
+    "memoryGrowth": -26.120000000000005
+  },
+  "memory_leak_detection": {
+    "operations": 953,
+    "errors": 0,
+    "memoryStart": 145.33,
+    "opsPerSecond": 63.53333333333333,
+    "errorRate": 0,
+    "memoryGrowth": 3.519999999999982
+  },
+  "memory_leak_analysis": {
+    "initialMemory": 145.33,
+    "finalMemory": 148.85,
+    "potentialLeak": 3.519999999999982,
+    "leakDetected": false
+  }
+}

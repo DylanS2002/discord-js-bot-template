@@ -89,32 +89,22 @@
 
 ### plugins\commands\ping.js
 - **Purpose**: Module functionality
-- **Exports**: type, name, description, permission, async execute(message, args) {
-        const sent = await message.reply('Pinging...');
-        const latency = sent.createdTimestamp - message.createdTimestamp;
-        await sent.edit(`Pong! Latency
+- **Exports**: 
 - **Dependencies**: 
 
 ### plugins\interactions\button.js
 - **Purpose**: Module functionality
-- **Exports**: type, name, filter(interaction) {
-        return interaction.isButton() && interaction.customId.startsWith('example_');
+- **Exports**: 
 - **Dependencies**: 
 
 ### plugins\messages\welcome.js
 - **Purpose**: Module functionality
-- **Exports**: type, name, description, filter(message) {
-        return message.type === 7; // GUILD_MEMBER_JOIN
+- **Exports**: 
 - **Dependencies**: 
 
 ### plugins\slash\info.js
 - **Purpose**: Module functionality
-- **Exports**: type, name, data, async execute(interaction) {
-        const uptime = process.uptime();
-        const memory = process.memoryUsage().heapUsed / 1024 / 1024;
-        
-        await interaction.reply({
-            content
+- **Exports**: 
 - **Dependencies**: discord.js
 
 ### security\permissions.js
@@ -132,6 +122,11 @@
 - **Exports**: ProjectAnalyzer
 - **Dependencies**: fs, path
 
+### utils\docs\ast-parser.js
+- **Purpose**: Module functionality
+- **Exports**: ASTParser
+- **Dependencies**: fs, @babel/parser
+
 ### utils\docs\file-scanner.js
 - **Purpose**: Module functionality
 - **Exports**: FileScanner
@@ -140,12 +135,11 @@
 ### utils\docs\module-parser.js
 - **Purpose**: Module functionality
 - **Exports**: ModuleParser
-- **Dependencies**: fs, path
+- **Dependencies**: fs
 
 ### utils\docs\readme-generator.js
 - **Purpose**: Module functionality
-- **Exports**: type, name, description, permission, async execute(message, args) {
-        await message.reply(\`Hello \${message.author.username
+- **Exports**: ReadmeGenerator
 - **Dependencies**: discord.js
 
 ### utils\docs\writer.js
@@ -180,3 +174,7 @@ The plugin system uses runtime discovery:
 3. Register with appropriate handlers
 4. Apply security and rate limiting
 5. Isolate errors per plugin
+
+undefined
+
+undefined

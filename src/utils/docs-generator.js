@@ -31,32 +31,65 @@ class DocsGenerator {
         console.log('Documentation generated successfully');
     }
 
-    generateArchitectureDocs(projectData) {
-        return `# Architecture Overview
+generateArchitectureDocs(projectData) {
+        const config = this.getDocConfig();
+        
+        let content = `# Architecture Overview\n\n`;
+        
+        if (config.includeSections.modules) {
+            content += `## Module Dependencies\n\n`;
+            content += Array.from(projectData.modules.entries()).map(([path, module]) => 
+                `### ${path}\n- **Purpose**: ${module.description}\n- **Exports**: ${module.exports.join(', ')}\n- **Dependencies**: ${module.dependencies.join(', ')}\n`
+            ).join('\n');
+            content += '\n\n';
+        }
+        
+        if (config.includeSections.performance) {
+            content += config.sections.performance + '\n\n';
+        }
+        
+        if (config.includeSections.plugins) {
+            content += config.sections.plugins + '\n\n';
+        }
+        
+        if (config.includeSections.benchmarks) {
+            content += config.sections.benchmarks + '\n\n';
+        }
+        
+        if (config.includeSections.stress) {
+            content += config.sections.stress;
+        }
+        
+        return content;
+    }
 
-## Module Dependencies
-
-${Array.from(projectData.modules.entries()).map(([path, module]) => 
-    `### ${path}\n- **Purpose**: ${module.description}\n- **Exports**: ${module.exports.join(', ')}\n- **Dependencies**: ${module.dependencies.join(', ')}\n`
-).join('\n')}
-
-## Performance Characteristics
+    getDocConfig() {
+        return {
+            includeSections: {
+                modules: true,
+                performance: true,
+                plugins: true,
+                benchmarks: true,
+                stress: true
+            },
+            sections: {
+                performance: `## Performance Characteristics
 
 All modules are designed for production performance:
 - Database operations under 10ms
 - Memory usage optimized
 - Concurrent operation support
-- Graceful error handling
-
-## Plugin System Architecture
+- Graceful error handling`,
+                plugins: `## Plugin System Architecture
 
 The plugin system uses runtime discovery:
 1. Scan plugin directories on startup
 2. Load modules matching plugin interface
 3. Register with appropriate handlers
 4. Apply security and rate limiting
-5. Isolate errors per plugin
-`;
+5. Isolate errors per plugin`
+            }
+        };
     }
 
     generateApiDocs() {
