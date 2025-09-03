@@ -1,5 +1,5 @@
 const fs = require('fs').promises;
-const { PATH_RESULTS, PATH_BASELINE, PATH_PR_BASELINE } = require('./result-paths');
+const { PATH_BASELINE, PATH_PR_BASELINE, PATH_OUTPUT } = require('./result-paths');
 
 const SPEED_THRESHOLD = 15;
 const MEMORY_THRESHOLD = 20;
