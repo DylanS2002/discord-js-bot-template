@@ -56,8 +56,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: pr-results
-          path: tests/data/results.json
+          path: tests/data/pr-results.json
 
       - name: Update pr-baseline on main
         if: github.ref == 'refs/heads/main'
-        run: cp tests/data/results.json tests/data/pr-baseline.json
+        run: cp tests/data/pr-results.json tests/data/pr-baseline.json

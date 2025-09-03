@@ -1,14 +1,14 @@
 const { performance } = require('perf_hooks');
 const fs = require('fs').promises;
 const path = require('path');
-const { PATH_BASELINE, PATH_RESULTS } = require('./result-paths');
+const { PATH_BASELINE, PATH_OUTPUT } = require('./result-paths');
 
 class BenchmarkFramework {
-    constructor() {
+    constructor(outputPath = PATH_OUTPUT) {
         this.results = {};
         this.baselines = {};
-        this.outputPath = PATH_RESULTS
-        this.baselinePath = PATH_BASELINE
+        this.outputPath = outputPath;
+        this.baselinePath = PATH_BASELINE;
     }
 
     async loadBaselines() {

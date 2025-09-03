@@ -9,7 +9,7 @@ const MEMORY_IMPROVEMENT_THRESHOLD = 10;
 const SKIP_COMPONENTS = ['audit_logging', 'docs_generation'];
 
 async function checkRegressions() {
-    const resultsPath = PATH_RESULTS;
+    const resultsPath = PATH_OUTPUT;
     const isCI = process.env.CI === 'true';
     const baselinePath = isCI ? PATH_PR_BASELINE : PATH_BASELINE;
 
