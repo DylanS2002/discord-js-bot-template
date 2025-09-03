@@ -13,7 +13,7 @@ module.exports = {
         
         await interaction.reply({
             content: `Bot Uptime: ${Math.floor(uptime / 60)}m ${Math.floor(uptime % 60)}s\nMemory: ${memory.toFixed(2)}MB`,
-            ephemeral: true
+            flags: 64
         });
     }
 };

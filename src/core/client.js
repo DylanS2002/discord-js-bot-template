@@ -1,8 +1,9 @@
-const { Client, GatewayIntentBits } = require('discord.js');
+const { Client, GatewayIntentBits, REST, Routes } = require('discord.js');
 const config = require('./config');
 const { INTENTS } = require('./constants');
 const { initializeDatabase } = require('../data');
 const { registerEventHandlers } = require('../handlers/command');
+const { getSlashCommandData } = require('../handlers/slash');
 const { startApiServer } = require('../api/server');
 
 const client = new Client({
@@ -18,11 +19,18 @@ client.once('clientReady', async () => {
     try {
         await initializeDatabase();
         registerEventHandlers(client);
-        
+
+        const rest = new REST({ version: '10' }).setToken(config.discord.token);
+
+        await rest.put(
+            Routes.applicationGuildCommands(config.discord.clientId, config.discord.guildId),
+            { body: getSlashCommandData() }
+        );
+
         if (config.api.enabled) {
             await startApiServer();
         }
-        
+
         console.log(`Logged in as ${client.user.tag} - All systems ready`);
     } catch (error) {
         console.error('Bot initialization failed:', error);

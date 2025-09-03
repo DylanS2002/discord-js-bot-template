@@ -1,4 +1,3 @@
-// Text command handler
 const { processMessage } = require('./message');
 const { processSlashCommand } = require('./slash');
 const { processInteraction } = require('./interaction');

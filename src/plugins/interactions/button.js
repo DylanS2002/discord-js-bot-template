@@ -12,10 +12,10 @@ module.exports = {
         
         switch(action) {
             case 'confirm':
-                await interaction.reply({ content: 'Confirmed!', ephemeral: true });
+                await interaction.reply({ content: 'Confirmed!', flags: 64 });
                 break;
             case 'cancel':
-                await interaction.reply({ content: 'Cancelled!', ephemeral: true });
+                await interaction.reply({ content: 'Cancelled!', flags: 64 });
                 break;
         }
     }

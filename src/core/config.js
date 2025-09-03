@@ -33,7 +33,8 @@ function validateBoolean(key, defaultValue = false) {
 const config = Object.freeze({
     discord: {
         token: validateRequired('DISCORD_TOKEN'),
-        clientId: validateRequired('CLIENT_ID')
+        clientId: validateRequired('CLIENT_ID'),
+        guildId: validateRequired('GUILD_ID')
     },
     database: {
         path: process.env.DB_PATH || './data/bot.db',

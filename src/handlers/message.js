@@ -1,10 +1,9 @@
-// Message event handler
 const fs = require('fs');
 const path = require('path');
 const { COMMAND_PREFIXES } = require('../core/constants');
 const { checkRateLimit } = require('../security/ratelimit');
 const { checkCommandPermission } = require('../security/permissions');
-const { insertAuditLog } = require('../data/database');
+const { insertAuditLog } = require('../data');
 const { AUDIT_ACTIONS } = require('../core/constants');
 
 const messagePlugins = new Map();

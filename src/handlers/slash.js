@@ -1,9 +1,8 @@
-// Slash command handler
 const fs = require('fs');
 const path = require('path');
 const { checkRateLimit } = require('../security/ratelimit');
 const { checkCommandPermission } = require('../security/permissions');
-const { insertAuditLog } = require('../data/database');
+const { insertAuditLog } = require('../data');
 const { AUDIT_ACTIONS } = require('../core/constants');
 
 const slashPlugins = new Map();
@@ -40,66 +39,66 @@ async function processSlashCommand(interaction) {
     const plugin = slashPlugins.get(commandName);
     
     if (!plugin) {
-        await interaction.reply({ content: 'Unknown command.', ephemeral: true });
+        await interaction.reply({ content: 'Unknown command.', flags: 64 });
         return;
     }
-    
+
     const userId = interaction.user.id;
     const guildId = interaction.guild?.id;
-    
+
     try {
         if (guildId) {
             const rateLimit = await checkRateLimit(userId, guildId, commandName);
             if (!rateLimit.allowed) {
                 await interaction.reply({ 
                     content: `Rate limited. Try again in ${Math.ceil(rateLimit.resetIn / 1000)} seconds.`,
-                    ephemeral: true 
+                    flags: 64 
                 });
                 await insertAuditLog(guildId, userId, AUDIT_ACTIONS.RATE_LIMITED, { command: commandName });
                 return;
             }
-            
+
             if (plugin.permission) {
                 const hasPermission = await checkCommandPermission(userId, guildId, plugin.permission);
                 if (!hasPermission) {
                     await interaction.reply({ 
                         content: 'You do not have permission to use this command.',
-                        ephemeral: true 
+                        flags: 64 
                     });
                     await insertAuditLog(guildId, userId, AUDIT_ACTIONS.PERMISSION_DENIED, { command: commandName });
                     return;
                 }
             }
         }
-        
+
         await plugin.execute(interaction);
-        
+
         if (guildId) {
             await insertAuditLog(guildId, userId, AUDIT_ACTIONS.COMMAND_EXECUTED, { 
                 command: commandName,
                 options: interaction.options.data 
             });
         }
-        
+
     } catch (error) {
         console.error(`Slash command ${commandName} error:`, error);
-        
+
         if (guildId) {
             await insertAuditLog(guildId, userId, AUDIT_ACTIONS.ERROR_OCCURRED, { 
                 command: commandName, 
                 error: error.message 
             });
         }
-        
+
         if (plugin.handleError) {
             await plugin.handleError(interaction, error);
         } else {
             const content = 'An error occurred while processing your command.';
-            
+
             if (interaction.deferred || interaction.replied) {
-                await interaction.editReply({ content, ephemeral: true });
+                await interaction.editReply({ content, flags: 64 });
             } else {
-                await interaction.reply({ content, ephemeral: true });
+                await interaction.reply({ content, flags: 64 });
             }
         }
     }
