@@ -1,5 +1,5 @@
 const fs = require('fs').promises;
-const { PATH_RESULTS, PATH_BASELINE, PATH_PR_BASELINE } = require('./result-paths');
+const { PATH_OUTPUT, PATH_BASELINE, PATH_PR_BASELINE } = require('./result-paths');
 
 const SPEED_THRESHOLD = 15;
 const MEMORY_THRESHOLD = 20;
@@ -33,7 +33,6 @@ async function checkRegressions() {
             console.error('No baseline found for PR comparison. Run benchmarks on main branch first.');
             process.exit(1);
         }
-        // Local development - create baseline normally
         await fs.writeFile(baselinePath, JSON.stringify(results, null, 2));
         console.log(`Baseline established at ${baselinePath}`);
         process.exit(0);
