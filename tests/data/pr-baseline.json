@@ -1,195 +1,195 @@
 {
   "config_loading": {
     "speed_ms": 0.28,
-    "memory_mb": 78.47,
-    "memory_delta_mb": 75.08,
+    "memory_mb": 78.36,
+    "memory_delta_mb": 74.97,
     "status": "pass",
-    "timestamp": "2025-09-03T21:06:00.265Z",
+    "timestamp": "2025-09-03T21:11:55.150Z",
     "baseline_comparison": {
       "speed_change_ms": -0.1,
-      "memory_change_mb": -3.45,
+      "memory_change_mb": -3.56,
       "baseline_speed_ms": 0.38,
       "baseline_memory_mb": 81.92
     }
   },
   "constants_access": {
     "speed_ms": 0.03,
-    "memory_mb": 78.49,
+    "memory_mb": 78.39,
     "memory_delta_mb": 0.03,
     "status": "pass",
-    "timestamp": "2025-09-03T21:06:03.575Z",
+    "timestamp": "2025-09-03T21:11:58.474Z",
     "baseline_comparison": {
       "speed_change_ms": 0,
-      "memory_change_mb": 8.89,
+      "memory_change_mb": 8.79,
       "baseline_speed_ms": 0.03,
       "baseline_memory_mb": 69.6
     }
   },
   "client_initialization": {
-    "speed_ms": 0.32,
-    "memory_mb": 249.95,
-    "memory_delta_mb": 171.46,
+    "speed_ms": 0.34,
+    "memory_mb": 249.93,
+    "memory_delta_mb": 171.54,
     "status": "pass",
-    "timestamp": "2025-09-03T21:06:07.359Z",
+    "timestamp": "2025-09-03T21:12:02.473Z",
     "baseline_comparison": {
-      "speed_change_ms": -0.33,
-      "memory_change_mb": 35.9,
+      "speed_change_ms": -0.31,
+      "memory_change_mb": 35.88,
       "baseline_speed_ms": 0.65,
       "baseline_memory_mb": 214.05
     }
   },
   "shutdown_preparation": {
     "speed_ms": 0.04,
-    "memory_mb": 249.84,
+    "memory_mb": 249.83,
     "memory_delta_mb": -0.03,
     "status": "pass",
-    "timestamp": "2025-09-03T21:06:08.396Z",
+    "timestamp": "2025-09-03T21:12:03.488Z",
     "baseline_comparison": {
       "speed_change_ms": 0.01,
-      "memory_change_mb": 45.69,
+      "memory_change_mb": 45.68,
       "baseline_speed_ms": 0.03,
       "baseline_memory_mb": 204.15
     }
   },
   "real_db_init": {
-    "speed_ms": 0.5,
-    "memory_mb": 249.99,
+    "speed_ms": 0.48,
+    "memory_mb": 249.98,
     "memory_delta_mb": 0.15,
     "status": "pass",
-    "timestamp": "2025-09-03T21:06:09.172Z",
+    "timestamp": "2025-09-03T21:12:04.233Z",
     "baseline_comparison": {
-      "speed_change_ms": -0.35,
-      "memory_change_mb": 34.37,
+      "speed_change_ms": -0.37,
+      "memory_change_mb": 34.36,
       "baseline_speed_ms": 0.85,
       "baseline_memory_mb": 215.62
     }
   },
   "real_db_operations": {
-    "speed_ms": 1.83,
-    "memory_mb": 250.16,
-    "memory_delta_mb": 0.17,
+    "speed_ms": 1.77,
+    "memory_mb": 250.14,
+    "memory_delta_mb": 0.16,
     "status": "pass",
-    "timestamp": "2025-09-03T21:06:13.183Z",
+    "timestamp": "2025-09-03T21:12:08.060Z",
     "baseline_comparison": {
-      "speed_change_ms": -6.64,
-      "memory_change_mb": 54.7,
+      "speed_change_ms": -6.7,
+      "memory_change_mb": 54.68,
       "baseline_speed_ms": 8.47,
       "baseline_memory_mb": 195.46
     }
   },
   "permission_check": {
     "speed_ms": 0,
-    "memory_mb": 250.15,
+    "memory_mb": 250.13,
     "memory_delta_mb": 0.01,
     "status": "pass",
-    "timestamp": "2025-09-03T21:06:13.443Z",
+    "timestamp": "2025-09-03T21:12:08.317Z",
     "baseline_comparison": {
       "speed_change_ms": 0,
-      "memory_change_mb": 53.37,
+      "memory_change_mb": 53.35,
       "baseline_speed_ms": 0,
       "baseline_memory_mb": 196.78
     }
   },
   "admin_permission_check": {
     "speed_ms": 0,
-    "memory_mb": 250.15,
-    "memory_delta_mb": 0,
+    "memory_mb": 250.14,
+    "memory_delta_mb": 0.01,
     "status": "pass",
-    "timestamp": "2025-09-03T21:06:13.708Z",
+    "timestamp": "2025-09-03T21:12:08.575Z",
     "baseline_comparison": {
       "speed_change_ms": 0,
-      "memory_change_mb": 53.36,
+      "memory_change_mb": 53.35,
       "baseline_speed_ms": 0,
       "baseline_memory_mb": 196.79
     }
   },
   "rate_limit_check": {
-    "speed_ms": 1.23,
-    "memory_mb": 250.24,
+    "speed_ms": 1.16,
+    "memory_mb": 250.22,
     "memory_delta_mb": 0.08,
     "status": "pass",
-    "timestamp": "2025-09-03T21:06:26.229Z",
+    "timestamp": "2025-09-03T21:12:20.395Z",
     "baseline_comparison": {
-      "speed_change_ms": -5.36,
-      "memory_change_mb": 52.39,
+      "speed_change_ms": -5.43,
+      "memory_change_mb": 52.37,
       "baseline_speed_ms": 6.59,
       "baseline_memory_mb": 197.85
     }
   },
   "rate_limit_cleanup": {
-    "speed_ms": 0.13,
-    "memory_mb": 250.24,
+    "speed_ms": 0.12,
+    "memory_mb": 250.22,
     "memory_delta_mb": 0.01,
     "status": "pass",
-    "timestamp": "2025-09-03T21:06:26.739Z",
+    "timestamp": "2025-09-03T21:12:20.880Z",
     "baseline_comparison": {
-      "speed_change_ms": -0.04,
-      "memory_change_mb": 51.45,
+      "speed_change_ms": -0.05,
+      "memory_change_mb": 51.43,
       "baseline_speed_ms": 0.17,
       "baseline_memory_mb": 198.79
     }
   },
   "command_parsing": {
     "speed_ms": 0,
-    "memory_mb": 250.26,
+    "memory_mb": 250.25,
     "memory_delta_mb": 0.02,
     "status": "pass",
-    "timestamp": "2025-09-03T21:06:27.046Z",
+    "timestamp": "2025-09-03T21:12:21.181Z",
     "baseline_comparison": {
       "speed_change_ms": 0,
-      "memory_change_mb": 45.8,
+      "memory_change_mb": 45.79,
       "baseline_speed_ms": 0,
       "baseline_memory_mb": 204.46
     }
   },
   "plugin_loading": {
     "speed_ms": 0.01,
-    "memory_mb": 250.3,
-    "memory_delta_mb": 0.04,
+    "memory_mb": 250.27,
+    "memory_delta_mb": 0.03,
     "status": "pass",
-    "timestamp": "2025-09-03T21:06:27.349Z",
+    "timestamp": "2025-09-03T21:12:21.475Z",
     "baseline_comparison": {
       "speed_change_ms": -0.03,
-      "memory_change_mb": 46.65,
+      "memory_change_mb": 46.62,
       "baseline_speed_ms": 0.04,
       "baseline_memory_mb": 203.65
     }
   },
   "audit_logging": {
-    "speed_ms": 1.84,
-    "memory_mb": 250.35,
-    "memory_delta_mb": 0.06,
+    "speed_ms": 1.82,
+    "memory_mb": 250.33,
+    "memory_delta_mb": 0.05,
     "status": "pass",
-    "timestamp": "2025-09-03T21:06:28.516Z",
+    "timestamp": "2025-09-03T21:12:22.616Z",
     "baseline_comparison": {
-      "speed_change_ms": -184.05,
-      "memory_change_mb": 46.77,
+      "speed_change_ms": -184.07,
+      "memory_change_mb": 46.75,
       "baseline_speed_ms": 185.89,
       "baseline_memory_mb": 203.58
     }
   },
   "api_server_lifecycle": {
     "speed_ms": 0.01,
-    "memory_mb": 250.36,
+    "memory_mb": 250.34,
     "memory_delta_mb": 0.01,
     "status": "pass",
-    "timestamp": "2025-09-03T21:06:28.793Z",
+    "timestamp": "2025-09-03T21:12:22.878Z",
     "baseline_comparison": {
       "speed_change_ms": -0.04,
-      "memory_change_mb": 47.2,
+      "memory_change_mb": 47.18,
       "baseline_speed_ms": 0.05,
       "baseline_memory_mb": 203.16
     }
   },
   "docs_generation": {
-    "speed_ms": 17.91,
-    "memory_mb": 253.51,
-    "memory_delta_mb": 3.15,
+    "speed_ms": 17.98,
+    "memory_mb": 253.47,
+    "memory_delta_mb": 3.13,
     "status": "pass",
-    "timestamp": "2025-09-03T21:06:38.064Z",
+    "timestamp": "2025-09-03T21:12:32.119Z",
     "baseline_comparison": {
-      "speed_change_ms": -2.9,
-      "memory_change_mb": 52.71,
+      "speed_change_ms": -2.83,
+      "memory_change_mb": 52.67,
       "baseline_speed_ms": 20.81,
       "baseline_memory_mb": 200.8
     }
