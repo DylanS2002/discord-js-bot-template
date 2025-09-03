@@ -42,7 +42,7 @@ jobs:
         if: github.event_name == 'pull_request'
         run: |
           git fetch origin main
-          git checkout origin/main -- tests/data/baseline.json
+          git checkout origin/main -- tests/data/baseline.json || echo "No baseline found, will create one"
           git checkout origin/main -- tests/check-regressions.js
 
       - name: Run benchmarks

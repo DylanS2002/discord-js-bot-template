@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js');
+const { EPHEMERAL } = require('../../core/constants');
 
 module.exports = {
     type: 'slash',
@@ -13,7 +14,7 @@ module.exports = {
         
         await interaction.reply({
             content: `Bot Uptime: ${Math.floor(uptime / 60)}m ${Math.floor(uptime % 60)}s\nMemory: ${memory.toFixed(2)}MB`,
-            flags: 64
+            flags: EPHEMERAL
         });
     }
 };

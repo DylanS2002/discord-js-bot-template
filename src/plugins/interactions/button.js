@@ -1,3 +1,5 @@
+const { EPHEMERAL } = require("../../core/constants");
+
 // src/plugins/interactions/button.js - Example interaction plugin
 module.exports = {
     type: 'interaction',
@@ -12,10 +14,10 @@ module.exports = {
         
         switch(action) {
             case 'confirm':
-                await interaction.reply({ content: 'Confirmed!', flags: 64 });
+                await interaction.reply({ content: 'Confirmed!', flags: EPHEMERAL });
                 break;
             case 'cancel':
-                await interaction.reply({ content: 'Cancelled!', flags: 64 });
+                await interaction.reply({ content: 'Cancelled!', flags: EPHEMERAL });
                 break;
         }
     }

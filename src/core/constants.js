@@ -100,6 +100,8 @@ const INTENTS = Object.freeze({
     DIRECT_MESSAGES: 'DirectMessages'
 });
 
+const EPHEMERAL = 64;
+
 module.exports = {
     DISCORD_PERMISSIONS,
     RESPONSE_STATUS,
@@ -109,5 +111,6 @@ module.exports = {
     AUDIT_ACTIONS,
     LOG_LEVELS,
     COMMAND_PREFIXES,
-    INTENTS
+    INTENTS,
+    EPHEMERAL
 };

@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const { checkRateLimit } = require('../security/ratelimit');
 const { insertAuditLog } = require('../data');
-const { AUDIT_ACTIONS } = require('../core/constants');
+const { AUDIT_ACTIONS, EPHEMERAL } = require('../core/constants');
 
 const interactionPlugins = new Map();
 
@@ -46,7 +46,7 @@ async function processInteraction(interaction) {
                 if (!rateLimit.allowed) {
                     await interaction.reply({ 
                         content: `Rate limited. Try again in ${Math.ceil(rateLimit.resetIn / 1000)} seconds.`,
-                        flags: 64 
+                        flags: EPHEMERAL
                     });
                     await insertAuditLog(guildId, userId, AUDIT_ACTIONS.RATE_LIMITED, { 
                         interaction: plugin.name 
@@ -83,9 +83,9 @@ async function processInteraction(interaction) {
                     const content = 'An error occurred while processing your interaction.';
                     
                     if (interaction.deferred || interaction.replied) {
-                        await interaction.editReply({ content, flags: 64  });
+                        await interaction.editReply({ content, flags: EPHEMERAL });
                     } else {
-                        await interaction.reply({ content, flags: 64  });
+                        await interaction.reply({ content, flags: EPHEMERAL });
                     }
                 } catch (replyError) {
                     console.error('Failed to send error response:', replyError);

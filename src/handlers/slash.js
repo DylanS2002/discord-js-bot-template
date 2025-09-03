@@ -3,7 +3,7 @@ const path = require('path');
 const { checkRateLimit } = require('../security/ratelimit');
 const { checkCommandPermission } = require('../security/permissions');
 const { insertAuditLog } = require('../data');
-const { AUDIT_ACTIONS } = require('../core/constants');
+const { AUDIT_ACTIONS, EPHEMERAL } = require('../core/constants');
 
 const slashPlugins = new Map();
 
@@ -39,7 +39,7 @@ async function processSlashCommand(interaction) {
     const plugin = slashPlugins.get(commandName);
     
     if (!plugin) {
-        await interaction.reply({ content: 'Unknown command.', flags: 64 });
+        await interaction.reply({ content: 'Unknown command.', flags: EPHEMERAL });
         return;
     }
 
@@ -52,7 +52,7 @@ async function processSlashCommand(interaction) {
             if (!rateLimit.allowed) {
                 await interaction.reply({ 
                     content: `Rate limited. Try again in ${Math.ceil(rateLimit.resetIn / 1000)} seconds.`,
-                    flags: 64 
+                    flags: EPHEMERAL
                 });
                 await insertAuditLog(guildId, userId, AUDIT_ACTIONS.RATE_LIMITED, { command: commandName });
                 return;
@@ -63,7 +63,7 @@ async function processSlashCommand(interaction) {
                 if (!hasPermission) {
                     await interaction.reply({ 
                         content: 'You do not have permission to use this command.',
-                        flags: 64 
+                        flags: EPHEMERAL
                     });
                     await insertAuditLog(guildId, userId, AUDIT_ACTIONS.PERMISSION_DENIED, { command: commandName });
                     return;
@@ -96,9 +96,9 @@ async function processSlashCommand(interaction) {
             const content = 'An error occurred while processing your command.';
 
             if (interaction.deferred || interaction.replied) {
-                await interaction.editReply({ content, flags: 64 });
+                await interaction.editReply({ content, flags: EPHEMERAL });
             } else {
-                await interaction.reply({ content, flags: 64 });
+                await interaction.reply({ content, flags: EPHEMERAL });
             }
         }
     }
