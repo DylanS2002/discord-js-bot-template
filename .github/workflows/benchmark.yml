@@ -38,11 +38,11 @@ jobs:
           echo "DISCORD_TOKEN=test_token" >> .env
           echo "CLIENT_ID=123456789" >> .env
 
-      - name: Checkout main branch baseline
+      - name: Checkout main branch pr-baseline
         if: github.event_name == 'pull_request'
         run: |
           git fetch origin main
-          git checkout origin/main -- tests/data/baseline.json || echo "No baseline found, will create one"
+          git checkout origin/main -- tests/data/pr-baseline.json || echo "No baseline found, will create one"
           git checkout origin/main -- tests/check-regressions.js
 
       - name: Run benchmarks
@@ -58,6 +58,6 @@ jobs:
           name: pr-results
           path: tests/data/results.json
 
-      - name: Update baseline on main
+      - name: Update pr-baseline on main
         if: github.ref == 'refs/heads/main'
-        run: cp tests/data/results.json tests/data/baseline.json
+        run: cp tests/data/results.json tests/data/pr-baseline.json

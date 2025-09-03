@@ -1,5 +1,5 @@
 const fs = require('fs').promises;
-const { PATH_RESULTS, PATH_BASELINE } = require('./result-paths');
+const { PATH_RESULTS, PATH_BASELINE, PATH_PR_BASELINE } = require('./result-paths');
 
 const SPEED_THRESHOLD = 15;
 const MEMORY_THRESHOLD = 20;
@@ -10,7 +10,8 @@ const SKIP_COMPONENTS = ['audit_logging', 'docs_generation'];
 
 async function checkRegressions() {
     const resultsPath = PATH_RESULTS;
-    const baselinePath = PATH_BASELINE;
+    const isCI = process.env.CI === 'true';
+    const baselinePath = isCI ? PATH_PR_BASELINE : PATH_BASELINE;
 
     let results, baseline;
 
@@ -25,7 +26,7 @@ async function checkRegressions() {
         baseline = JSON.parse(await fs.readFile(baselinePath, 'utf8'));
     } catch {
         await fs.writeFile(baselinePath, JSON.stringify(results, null, 2));
-        console.log('Baseline established');
+        console.log(`Baseline established at ${baselinePath}`);
         process.exit(0);
     }
 
