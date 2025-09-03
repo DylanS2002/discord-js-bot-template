@@ -1,11 +1,12 @@
 const { performance } = require('perf_hooks');
 const fs = require('fs').promises;
 const path = require('path');
+const { PATH_STRESS } = require('./result-paths');
 
 class StressTestFramework {
     constructor() {
         this.results = {};
-        this.outputPath = path.join(__dirname, 'data', 'stress-results.json');
+        this.outputPath = PATH_STRESS
         this.isRunning = false;
     }
 
