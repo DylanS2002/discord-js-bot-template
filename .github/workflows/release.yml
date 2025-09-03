@@ -84,7 +84,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}
+          tag_name: ${{ github.ref_name }}
           release_name: Release ${{ steps.get_version.outputs.VERSION }}
           body: |
             ## Discord Bot Template v${{ steps.get_version.outputs.VERSION }}
