@@ -68,6 +68,7 @@ jobs:
           cp tests/data/pr-results.json tests/data/pr-baseline.json
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main || true
           git add tests/data/pr-baseline.json
-          git commit -m "Update performance baseline [skip ci]" || echo "No baseline changes to commit"
-          git push || echo "No changes to push"
+          git commit -m "Update performance baseline [skip ci]" || echo "No changes"
+          git push || echo "No push needed"

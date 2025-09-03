@@ -32,3 +32,6 @@ project_analysis.φ
 PROJECT_ANALYSIS.md
 /.(φ)cache
 .eslintrc.json
+tests/data/pr-baseline.json
+tests/data/pr-results.json
+TROUBLESHOOT.md
