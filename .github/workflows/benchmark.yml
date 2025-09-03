@@ -42,7 +42,11 @@ jobs:
         if: github.event_name == 'pull_request'
         run: |
           git fetch origin main
-          git checkout origin/main -- tests/data/pr-baseline.json || echo "No baseline found, will create one"
+          if ! git checkout origin/main -- tests/data/pr-baseline.json; then
+            echo "ERROR: No baseline exists on main branch"
+            echo "Please push to main branch first to establish baseline"
+            exit 1
+          fi
           git checkout origin/main -- tests/check-regressions.js
 
       - name: Run benchmarks
@@ -60,4 +64,10 @@ jobs:
 
       - name: Update pr-baseline on main
         if: github.ref == 'refs/heads/main'
-        run: cp tests/data/pr-results.json tests/data/pr-baseline.json
+        run: |
+          cp tests/data/pr-results.json tests/data/pr-baseline.json
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add tests/data/pr-baseline.json
+          git commit -m "Update performance baseline [skip ci]" || echo "No baseline changes to commit"
+          git push || echo "No changes to push"

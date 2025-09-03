@@ -1,5 +1,5 @@
 const fs = require('fs').promises;
-const { PATH_BASELINE, PATH_PR_BASELINE, PATH_OUTPUT } = require('./result-paths');
+const { PATH_OUTPUT, PATH_BASELINE, PATH_PR_BASELINE } = require('./result-paths');
 
 const SPEED_THRESHOLD = 15;
 const MEMORY_THRESHOLD = 20;
@@ -25,6 +25,10 @@ async function checkRegressions() {
     try {
         baseline = JSON.parse(await fs.readFile(baselinePath, 'utf8'));
     } catch {
+        if (isCI && process.env.GITHUB_REF !== 'refs/heads/main') {
+            console.error('No baseline found for PR comparison. Run benchmarks on main branch first.');
+            process.exit(1);
+        }
         await fs.writeFile(baselinePath, JSON.stringify(results, null, 2));
         console.log(`Baseline established at ${baselinePath}`);
         process.exit(0);
