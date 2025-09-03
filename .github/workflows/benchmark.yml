@@ -45,6 +45,12 @@ jobs:
           name: baseline
           path: tests/data/
 
+      - name: Checkout main version of regression script
+        if: github.event_name == 'pull_request'
+        run: |
+            git fetch origin main
+            git checkout origin/main -- tests/check-regressions.js
+
       - name: Run benchmarks
         run: npm run bench
 
