@@ -7,7 +7,7 @@ A production-ready Discord bot template with plugin-based architecture, comprehe
 ## Features
 
 - **Plugin System**: Auto-discovery for commands, slash commands, interactions, and message handlers
-- **Security**: Role-based permissions with database-backed rate limiting  
+- **Security**: Role-based permissions with database-backed rate limiting
 - **Database**: SQLite with migration system and audit trails
 - **API**: REST endpoints for external management and monitoring
 - **Monitoring**: Performance benchmarking and comprehensive logging
@@ -82,7 +82,7 @@ utils\docs\analyzer.js (66 lines)
 utils\docs\ast-parser.js (100 lines)
 utils\docs\file-scanner.js (40 lines)
 utils\docs\module-parser.js (110 lines)
-utils\docs\readme-generator.js (155 lines)
+utils\docs\readme-generator.js (150 lines)
 utils\docs\writer.js (48 lines)
 utils\logger.js (87 lines)
 ```
@@ -98,7 +98,7 @@ module.exports = {
     name: 'hello',
     description: 'Greet users',
     permission: null,
-    
+
     async execute(message, args) {
         await message.reply(`Hello ${message.author.username}!`);
     }
@@ -117,7 +117,7 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('ping')
         .setDescription('Check bot latency'),
-    
+
     async execute(interaction) {
         const ping = interaction.client.ws.ping;
         await interaction.reply(`Pong! ${ping}ms`);
@@ -160,7 +160,7 @@ SELECT * FROM audit_logs ORDER BY timestamp DESC LIMIT 10;
 
 Benchmark results show optimal performance:
 - Configuration loading: < 1ms
-- Database operations: < 10ms  
+- Database operations: < 10ms
 - Permission checks: < 2ms
 - Plugin loading: < 1ms
 

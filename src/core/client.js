@@ -14,7 +14,7 @@ const client = new Client({
     ]
 });
 
-client.once('ready', async () => {
+client.once('clientReady', async () => {
     try {
         await initializeDatabase();
         registerEventHandlers(client);
